@@ -40,4 +40,34 @@
  */
 export function calculateGST(amount, category) {
   // Your code here
+  const cats = ["essential", "food", "standard", "electronics", "luxury"]
+  if (typeof(category) !== "string" || amount <= 0 || typeof(amount) !== "number") return null
+  if (!Number.isFinite(amount) || amount == NaN) return null
+  if (!cats.includes(category.toLowerCase())) return null
+  category = category.toLowerCase()
+  if (category.toLowerCase() == cats[0]) {
+    const gstAmount = 0
+    const totalAmt = gstAmount + amount
+    return {baseAmount: amount, gstRate: 0, gstAmount: gstAmount, totalAmount: totalAmt}
+  }
+  else if (category.toLowerCase() == cats[1]) {
+    const gstAmount = parseFloat(((amount * 5)/100).toFixed(2))
+    const totalAmt = gstAmount + amount
+    return {baseAmount: amount, gstRate: 5, gstAmount: gstAmount, totalAmount: totalAmt}
+  }
+  else if (category.toLowerCase() == cats[2]) {
+    const gstAmount = parseFloat(((amount * 12)/100).toFixed(2))
+    const totalAmt = gstAmount + amount
+    return {baseAmount: amount, gstRate: 12, gstAmount: gstAmount, totalAmount: totalAmt}
+  }
+  else if (category.toLowerCase() == cats[3]) {
+    const gstAmount = parseFloat(((amount * 18)/100).toFixed(2))
+    const totalAmt = gstAmount + amount
+    return {baseAmount: amount, gstRate: 18, gstAmount: gstAmount, totalAmount: totalAmt}
+  }
+  else {
+    const gstAmount = parseFloat(((amount * 28)/100).toFixed(2))
+    const totalAmt = gstAmount + amount
+    return {baseAmount: amount, gstRate: 28, gstAmount: gstAmount, totalAmount: totalAmt}
+  }
 }
